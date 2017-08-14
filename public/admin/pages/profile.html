@@ -1,0 +1,38 @@
+<div class="col-lg-4 col-md-5">
+</div>
+<div class="col-lg-4 col-md-5">
+    <div class="card card-user">
+        <div class="image">
+            <img src="assets/img/background.jpg" alt="..." />
+        </div>
+        <div class="card-content">
+            <div class="author">
+                <img class="avatar border-white" src="assets/img/faces/user1.png" alt="..." />
+                <h4 class="card-title" id="user-name2">
+                </h4>
+            </div>
+
+        </div>
+        <hr>
+        <div class="text-center">
+            <div class="row">
+                <div class="col-md-3 col-md-offset-1">
+                    <h5 id="user-movil"></h5>
+                </div>
+
+                <div class="col-md-3"></div>
+                <div class="col-md-3">
+                    <h5 id="user-telefono"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-4 col-md-5"></div>
+<allergies class="html"></allergies>
+
+<script type="text/javascript">
+    $("#user-name2").append(user.nombre + ' ' + user.apellido + '<br /><a href="#"><small>' + user.correo + '</small></a>');
+    $("#user-movil").append(user.movil + '<br /><small>Movil</small>');
+    $("#user-telefono").append(user.telefono + '<br /><small>Telefono</small>');
+</script>

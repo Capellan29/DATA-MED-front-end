@@ -1,0 +1,124 @@
+<div class="modal fade" id="newPatientModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Nuevo Doctor</h4>
+            </div>
+            <form id="newPatient">
+                <div class="form-group fade">
+                    <input class="form-control" type="text" id="n" required="true" />
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nombre" class="control-label">Nombre <star>*</star></label>
+                        <input class="form-control" type="text" id="nombre" name="nombre" required="true" />
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre" class="control-label">Apellido <star>*</star></label>
+                        <input class="form-control" type="text" id="apellido" name="apellido" required="true" />
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre" class="control-label">Cedula <star>*</star></label>
+                        <input class="form-control" type="text" id="cedula" name="cedula" required="true" />
+                    </div>
+                    <div class="form-group">
+                        <label for="correo" class="control-label">Correo </label>
+                        <input class="form-control" type="text" id="correo" name="correo" email="true" />
+                    </div>
+                    <div class="form-group">
+                        <label for="direccion" class="control-label">Dirección </label>
+                        <input class="form-control" type="text" id="direccion" name="direccion" />
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono" class="control-label">Telefono </label>
+                        <input class="form-control" type="phone" id="telefono" name="telefono" />
+                    </div>
+                    <div class="form-group">
+                        <label for="movile" class="control-label">Movil </label>
+                        <input class="form-control" type="text" id="movil" name="movil" />
+                    </div>
+                    <div class="form-group">
+                        <label for="nacimiento" class="control-label">Nacimiento </label>
+                        <input type="text" class="form-control datepicker" name="fecha_nacimiento" id="nacimiento" />
+                    </div>
+                    <div class="form-group">
+                        <label for="sexo" class="control-label">Sexo </label>
+                        <select class="form-control" id="sexo" name="sexo">                    
+                            <option>M</option>
+                            <option>F</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="sangre" class="control-label">Sangre </label>
+                        <select class="form-control" id="sangre" name="sangre">                    
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="medico" class="control-label">Medico </label>
+                        <select class="form-control" id="medico" name="medico_id">                    
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="seguro" class="control-label">Seguro </label>
+                        <select class="form-control" id="seguro" name="seguro_id">                    
+                            
+                        </select>
+                    </div>
+                    <div class="category">
+                        <star>*</star> Campos obligatorios
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="save()" class="btn btn-success btn-fill">Aceptar</button>
+                    <button type="button" id="limpiar" class="btn btn-danger btn-fill" data-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="title">Pacientes</h2>
+            <button class="btn btn-fill btn-lg btn-magnify btn-success" data-toggle="modal" data-target="#newPatientModal"><i class="ti ti-plus"></i></button>
+            <br>
+            <br>
+            <br>
+
+            <div class="card">
+                <div class="card-content">
+                    <div class="toolbar">
+                    </div>
+                    <div>
+                        <table id="patientsTable" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Cedula</th>
+                                    <th>Correo</th>
+                                    <th>Telefono</th>
+                                    <th>Movil</th>
+                                    <th>Sexo</th>
+                                    <th>Sangre</th>
+
+                                    <th class="disabled-sorting">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="patientsTbl">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--  end card  -->
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/patients.js"></script>

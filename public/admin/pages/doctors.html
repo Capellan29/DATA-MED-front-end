@@ -1,0 +1,178 @@
+<div class="modal fade" id="newDoctorModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Nuevo Doctor</h4>
+            </div>
+            <form id="newDoctor">
+                <div class="form-group fade">
+                    <input class="form-control" type="text" id="n" required="true" />
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="rol" class="control-label">Cargo </label>
+                        <select class="form-control" data-style="btn btn-default btn-block" id="rol" name="rol">                    
+                        <option value="1">Medico</option>
+                        <option value="2">Paramedico</option>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre" class="control-label">Nombre <star>*</star></label>
+                        <input class="form-control" type="text" id="nombre" name="nombre" required="true" />
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido" class="control-label">Apellido <star>*</star></label>
+                        <input class="form-control" type="text" id="apellido" name="apellido" required="true" />
+                    </div>
+                    <div class="form-group">
+                        <label for="cedula" class="control-label">Cedula <star>*</star></label>
+                        <input class="form-control" type="text" id="cedula" name="cedula" required="true" />
+                    </div>
+                    <div class="form-group">
+                        <label for="correo" class="control-label">Correo <star>*</star></label>
+                        <input class="form-control" type="text" id="correo" name="correo" required="true" email="true" />
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono" class="control-label">Telefono </label>
+                        <input class="form-control" type="phone" id="telefono" name="telefono" />
+                    </div>
+                    <div class="form-group">
+                        <label for="movile" class="control-label">Movil </label>
+                        <input class="form-control" type="text" id="movil" name="movil" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="usuario" class="control-label">Usuario <star>*</star></label>
+                        <input class="form-control" type="text" id="usuario" name="usuario" required="true" />
+                    </div>
+                    <div class="form-group">
+                        <label for="clave" class="control-label">Clave <star>*</star></label>
+                        <input class="form-control" type="password" id="clave" name="clave" required="true" />
+                    </div>
+                    <div class="form-group">
+                        <label for="claveConf" class="control-label">Repetir clave <star>*</star></label>
+                        <input class="form-control" type="password" id="claveConf" equalTo="#clave" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hospital" class="control-label">Hospital </label>
+                        <select class="form-control" data-style="btn btn-default btn-block" id="hospital" name="hospital_id">                    
+                            
+                        </select>
+                    </div>
+                    <div class="category">
+                        <star>*</star> Campos obligatorios
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="save()" class="btn btn-success btn-fill">Aceptar</button>
+                    <button type="button" id="limpiar" class="btn btn-danger btn-fill" data-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editDoctorModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Editar</h4>
+            </div>
+            <form id="editDoctor">
+                <div class="form-group fade">
+                    <input class="form-control" type="text" id="n" required="true" />
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="rol" class="control-label">Cargo </label>
+                        <select class="form-control" data-style="btn btn-default btn-block" id="rol" name="rol">                    
+                        <option value="1">Medico</option>
+                        <option value="2">Paramedico</option>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre" class="control-label">Nombre <star>*</star></label>
+                        <input class="form-control" type="text" id="nombre" name="nombre" required="true" />
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido" class="control-label">Apellido <star>*</star></label>
+                        <input class="form-control" type="text" id="apellido" name="apellido" required="true" />
+                    </div>
+                    <div class="form-group">
+                        <label for="cedula" class="control-label">Cedula <star>*</star></label>
+                        <input class="form-control" type="text" id="cedula" name="cedula" required="true" />
+                    </div>
+                    <div class="form-group">
+                        <label for="correo" class="control-label">Correo <star>*</star></label>
+                        <input class="form-control" type="text" id="correo" name="correo" required="true" email="true" />
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono" class="control-label">Telefono </label>
+                        <input class="form-control" type="phone" id="telefono" name="telefono" />
+                    </div>
+                    <div class="form-group">
+                        <label for="movile" class="control-label">Movil </label>
+                        <input class="form-control" type="text" id="movil" name="movil" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hospital" class="control-label">Hospital </label>
+                        <select class="form-control" data-style="btn btn-default btn-block" id="editHospital" name="hospital_id">                    
+                            
+                        </select>
+                    </div>
+                    <div class="category">
+                        <star>*</star> Campos obligatorios
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="saveEdit()" class="btn btn-success btn-fill">Aceptar</button>
+                    <button type="button" id="limpiar" class="btn btn-danger btn-fill" data-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="title">Doctores</h2>
+            <button class="btn btn-fill btn-lg btn-magnify btn-success" data-toggle="modal" data-target="#newDoctorModal"><i class="ti ti-plus"></i></button>
+            <br>
+            <br>
+            <br>
+
+            <div class="card">
+                <div class="card-content">
+                    <div class="toolbar">
+                    </div>
+                    <div>
+                        <table id="doctorsTable" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Cargo</th>
+                                    <th>Cedula</th>
+                                    <th>Correo</th>
+                                    <th>Telefono</th>
+                                    <th>Movil</th>
+                                    <th class="disabled-sorting">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="doctorsTbl">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--  end card  -->
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/doctors.js"></script>
