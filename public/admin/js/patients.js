@@ -152,8 +152,6 @@ function save() {
         var patient = getObject("#newPatient");
         patient.action = (edit) ? "updatePaciente" : "registerPaciente";
         patient.id = idx;
-        console.log(patient);
-        debugger;
         $.ajax("http://34.210.252.187/datamed/index.php", {
             data: patient,
             type: "post",

@@ -36,12 +36,12 @@
     <div class="wrapper">
         <div class="sidebar" data-background-color="white" data-active-color="info">
             <div class="logo">
-                <a href="admin/index.html" class="simple-text logo-mini">
+                <a href="/index.html" class="simple-text logo-mini">
 					DMA
 				</a>
 
-                <a href="admin/index.html" class="simple-text logo-normal">
-					DATA MED ADMIN
+                <a href="/index.html" class="simple-text logo-normal">
+					DATA MED
 				</a>
             </div>
             <div class="sidebar-wrapper">
@@ -50,8 +50,7 @@
                         <img src="assets/img/faces/face-2.jpg" />
                     </div>
                     <div class="info">
-                        <a href="/admin/index.html?p=profile">
-
+                        <a href="/index.html?p=profile">
                             <span id="user-name"></span>
                         </a>
 
@@ -66,33 +65,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/admin/index.html?p=hospitals">
-                            <i class="fa fa-hospital-o"></i>
-                            <p> Hospitales</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/index.html?p=doctors">
-                            <i class="fa fa-user-md"></i>
-                            <p> Medicos</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/index.html?p=patients">
+                        <a href="/index.html?p=patients">
                             <i class="fa fa-users"></i>
                             <p> Pacientes</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/index.html?p=seguros">
-                            <i class="fa fa-id-card"></i>
-                            <p> Seguros</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/index.html?p=allergies">
-                            <i class="fa fa-frown-o"></i>
-                            <p> Alergias</p>
                         </a>
                     </li>
                 </ul>
@@ -193,15 +168,6 @@
 
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        // demo.initStatsDashboard();
-        // demo.initVectorMap();
-        // demo.initCirclePercentage();
-        // demo.initFormExtendedDatetimepickers();
-        $('#newDoctor').validate();
-
-    })
-
     var page = getUrlParameter('p');
     if (page != undefined) {
         $('#page-content').load("pages/" + page + ".html");
@@ -215,19 +181,5 @@
     }
     $("#user-name").text(user.nombre + ' ' + user.apellido);
 </script>
-
-<!-- <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
-<script>
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyD1JmjdeskKLXcnV12qkHZx9SlbR0Z9Vdk",
-        authDomain: "data-med.firebaseapp.com",
-        databaseURL: "https://data-med.firebaseio.com",
-        projectId: "data-med",
-        storageBucket: "",
-        messagingSenderId: "1008322234962"
-    };
-    firebase.initializeApp(config);
-</script> -->
 
 </html>

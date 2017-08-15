@@ -35,7 +35,7 @@
                             <form id="loginForm">
                                 <div class="card" data-background="color" data-color="blue">
                                     <div class="card-header">
-                                        <h3 class="card-title">Login - Admin</h3>
+                                        <h3 class="card-title">Login</h3>
                                     </div>
                                     <div class="card-content">
                                         <div class="form-group">
@@ -98,7 +98,7 @@
 
     function login() {
         var user = getObject("#loginForm");
-        user.action = "loginAdmin";
+        user.action = "login";
         $.ajax("http://34.210.252.187/datamed/index.php", {
             data: user,
             type: "post",

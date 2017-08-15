@@ -26,7 +26,7 @@
 
 <body>
     <script type="text/javascript">
-        var user = sessionStorage.getItem('user');
+        var user = sessionStorage.getItem('user_admin');
         if (user == undefined) {
             window.location = 'login.html';
         } else {
@@ -193,15 +193,6 @@
 
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        // demo.initStatsDashboard();
-        // demo.initVectorMap();
-        // demo.initCirclePercentage();
-        // demo.initFormExtendedDatetimepickers();
-        $('#newDoctor').validate();
-
-    })
-
     var page = getUrlParameter('p');
     if (page != undefined) {
         $('#page-content').load("pages/" + page + ".html");
@@ -210,7 +201,7 @@
     }
 
     function logOut() {
-        sessionStorage.removeItem('user');
+        sessionStorage.removeItem('user_admin');
         location = 'login.html';
     }
     $("#user-name").text(user.nombre + ' ' + user.apellido);

@@ -59,12 +59,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="medico" class="control-label">Medico </label>
-                        <select class="form-control" id="medico" name="medico_id">                    
-                            
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="seguro" class="control-label">Seguro </label>
                         <select class="form-control" id="seguro" name="seguro_id">                    
                             
@@ -79,6 +73,29 @@
                     <button type="button" id="limpiar" class="btn btn-danger btn-fill" data-dismiss="modal">Cancelar</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="alergiasModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Editar alergias</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="alergias" class="label-control">Alergias</label>
+                    <select class="form-control" multiple name="alergias" id="alergias">
+                        
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-fill btn-danger" onclick="cl()" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-fill btn-success" onclick="sv()">Aceptar</button>
+            </div>
         </div>
     </div>
 </div>
@@ -108,6 +125,7 @@
                                     <th>Sangre</th>
 
                                     <th class="disabled-sorting">Actions</th>
+                                    <th class="disabled-sorting"> + </th>
                                 </tr>
                             </thead>
                             <tbody id="patientsTbl">

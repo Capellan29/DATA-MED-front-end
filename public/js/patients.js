@@ -1,5 +1,6 @@
 var idx;
 var edit = false;
+var pacienteAlergias = [];
 var emptyPatient = {
     id: "",
     nombre: "",
@@ -12,7 +13,6 @@ var emptyPatient = {
     fecha_nacimiento: "",
     sexo: "",
     sangre: "",
-    medico_id: "",
     seguro_id: ""
 }
 
@@ -27,31 +27,21 @@ function info(id) {
         dataType: 'json',
         success: function(paciente) {
             var pac = paciente[0];
-            var med;
-            $.ajax({
-                type: 'GET',
-                url: 'http://34.210.252.187/datamed/index.php?action=getMedico&id=' + pac.medico_id,
-                dataType: 'json',
-                success: function(medico) {
-                    med = medico[0];
-                    var modal = '<div class="modal fade" id="infoPaciente" role="dialog">' +
-                        '<div class="modal-dialog">' +
-                        '<div class="modal-content">' +
-                        '<div class="modal-body">' +
-                        '<div class="card card-user">' +
-                        '<div class="image"><img src=assets/img/background.jpg " alt="..."/></div>' +
-                        '<div class="card-content"><div class="author"><img class="avatar border-white" src="assets/img/faces/face-1.jpg" alt="..."/>' +
-                        '<h4 class="card-title">' + pac.nombre + ' ' + pac.apellido + '<br /><a href="#"><small>' + pac.correo + '</small></a></h4>' +
-                        '</div><p class="description text-center">' +
-                        'Medico : ' + med.nombre + '</p> ' +
-                        '</div><hr><div class="text-center"><div class="row"><div class="col-md-3 col-md-offset-1">' +
-                        '<h5>' + pac.movil + '<br /><small>Movil</small></h5></div><div class="col-md-4"><h5>' + pac.cedula + '<br /><small>Cedula</small></h5>' +
-                        '</div><div class="col-md-3"><h5>' + pac.telefono + '<br /><small>Telefono</small></h5></div></div></div></div></div></div></div>';
-                    $('body').append(modal);
+            var modal = '<div class="modal fade" id="infoPaciente" role="dialog">' +
+                '<div class="modal-dialog">' +
+                '<div class="modal-content">' +
+                '<div class="modal-body">' +
+                '<div class="card card-user">' +
+                '<div class="image"><img src=assets/img/background.jpg " alt="..."/></div>' +
+                '<div class="card-content"><div class="author"><img class="avatar border-white" src="assets/img/faces/face-1.jpg" alt="..."/>' +
+                '<h4 class="card-title">' + pac.nombre + ' ' + pac.apellido + '<br /><a href="#"><small>' + pac.correo + '</small></a></h4>' +
+                '</div><p class="description text-center">' +
+                '</div><hr><div class="text-center"><div class="row"><div class="col-md-3 col-md-offset-1">' +
+                '<h5>' + pac.movil + '<br /><small>Movil</small></h5></div><div class="col-md-4"><h5>' + pac.cedula + '<br /><small>Cedula</small></h5>' +
+                '</div><div class="col-md-3"><h5>' + pac.telefono + '<br /><small>Telefono</small></h5></div></div></div></div></div></div></div>';
+            $('body').append(modal);
 
-                    $("#infoPaciente").modal();
-                }
-            })
+            $("#infoPaciente").modal();
         }
     })
 }
@@ -152,28 +142,44 @@ function save() {
         var patient = getObject("#newPatient");
         patient.action = (edit) ? "updatePaciente" : "registerPaciente";
         patient.id = idx;
+        patient.medico_id = user.id;
         console.log(patient);
-        debugger;
         $.ajax("http://34.210.252.187/datamed/index.php", {
             data: patient,
             type: "post",
             contentType: "application/x-www-form-urlencoded",
             success: function(message) {
-                $.notify({
-                    icon: "fa fa-check",
-                    message: "La operación fué realizada con exito"
-                }, {
-                    type: type[2],
-                    timer: 4000,
-                    placement: {
-                        from: 'top',
-                        align: 'right'
-                    }
-                });
-                clear();
-                $("#newPatientModal").modal("hide");
-                edit = false;
-                load(patient);
+                var msg = JSON.parse(message);
+                if (msg.error == undefined) {
+
+                    $.notify({
+                        icon: "fa fa-check",
+                        message: msg.exito
+                    }, {
+                        type: type[2],
+                        timer: 4000,
+                        placement: {
+                            from: 'top',
+                            align: 'right'
+                        }
+                    });
+                    clear();
+                    $("#newPatientModal").modal("hide");
+                    edit = false;
+                    load(patient);
+                } else {
+                    $.notify({
+                        icon: "fa fa-close",
+                        message: msg.error
+                    }, {
+                        type: type[4],
+                        timer: 4000,
+                        placement: {
+                            from: 'top',
+                            align: 'right'
+                        }
+                    });
+                }
             },
             error: function(message) {
                 console.log(message);
@@ -193,7 +199,9 @@ $("document").ready(function() {
         success: function(allData) {
             for (var id in allData) {
                 var p = allData[id];
-                load(p);
+                if (p.medico_id == user.id) {
+                    load(p);
+                }
             }
             $("#patientsTable").dataTable({
                 "pagingType": "full_numbers",
@@ -216,18 +224,6 @@ $("document").ready(function() {
 
     $.ajax({
         type: 'GET',
-        url: 'http://34.210.252.187/datamed/index.php?action=getMedicos',
-        dataType: 'json',
-        success: function(medicos) {
-            for (var id in medicos) {
-                var medico = medicos[id];
-                if (medico.rol == 1)
-                    $("#medico").append('<option value="' + medico.id + '">' + medico.nombre + '</option>');
-            }
-        }
-    })
-    $.ajax({
-        type: 'GET',
         url: 'http://34.210.252.187/datamed/index.php?action=getSangres',
         dataType: 'json',
         success: function(sangres) {
@@ -248,6 +244,17 @@ $("document").ready(function() {
             }
         }
     })
+    $.ajax({
+        type: 'GET',
+        url: 'http://34.210.252.187/datamed/index.php?action=getAlergias',
+        dataType: 'json',
+        success: function(alergias) {
+            for (var id in alergias) {
+                var alergia = alergias[id];
+                $("#alergias").append('<option class="btn" value="' + alergia.id + '">' + alergia.nombre + ' </option> ');
+            }
+        }
+    })
 
     $('.datepicker').datetimepicker({
         format: 'MM/DD/YYYY', //use this format if you want the 12hours timpiecker with AM/PM toggle
@@ -265,6 +272,73 @@ $("document").ready(function() {
     });
 })
 
+function aler(id) {
+    $("#alergiasModal").modal();
+    idx = id;
+    pacienteAlergias = [];
+    $.ajax({
+        type: 'GET',
+        url: 'http://34.210.252.187/datamed/index.php?action=getAlergiasDePaciente&id=' + id,
+        dataType: 'json',
+        success: function(data) {
+            if (data != false) {
+                for (var i in data) {
+                    pacienteAlergias.push(data[i].alergia_id);
+                }
+            }
+            $("#alergias").val(pacienteAlergias);
+        }
+    })
+
+}
+
+function cl() {
+    $("#alergias").val("")
+}
+
+function sv() {
+    var send = { action: 'deasignAlergia' };
+    for (var val in pacienteAlergias) {
+        send.alergia_id = pacienteAlergias[val];
+        send.paciente_id = idx;
+        $.ajax("http://34.210.252.187/datamed/index.php", {
+            data: send,
+            type: "post",
+            contentType: "application/x-www-form-urlencoded"
+        })
+    }
+    var alergias = $("#alergias").val();
+    send = { action: 'asignAlergia' };
+    for (var val in alergias) {
+        send.alergia_id = alergias[val];
+        send.paciente_id = idx;
+        $.ajax("http://34.210.252.187/datamed/index.php", {
+            data: send,
+            type: "post",
+            contentType: "application/x-www-form-urlencoded",
+            success: function(msg) {
+                $.notify({
+                    icon: "fa fa-check",
+                    message: 'Datos actualiados'
+                }, {
+                    type: type[2],
+                    timer: 4000,
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    }
+                });
+            }
+        })
+    }
+    pacienteAlergias = [];
+}
+
+
+function hist(id) {
+    idx = id
+}
+
 function load(p) {
     $("#patientsTbl").append('' +
         '<tr id="tr' + p.id + '">' +
@@ -278,5 +352,8 @@ function load(p) {
         '<td><a href="#" onclick="info(\'' + p.id + '\')" class="btn btn-simple btn-info btn-icon info"><i class="ti ti-info"></i></a>' +
         '<a href="#" onclick="editar(\'' + p.id + '\')" class="btn btn-simple btn-warning btn-icon edit"><i class="ti-pencil-alt"></i></a>' +
         '<a href="#" onclick="del(\'' + p.id + '\')" class="btn btn-rotate btn-simple btn-danger btn-icon remove"><i class="ti-close"></i></a>' +
-        '</td></tr>')
+        '</td><td class="dropdown"><a href="#options" class="dropdown-toggle btn-rotate" data-toggle="dropdown"><i class="ti-settings"></i>' +
+        '<p class="hidden-md hidden-lg"><i class="fa fa-plus"></i><b class="caret"></b></p></a><ul class="dropdown-menu">' +
+        '<li><a href="#" onclick="aler(' + p.id + ')"><i class="fa fa-pencil"></i> Alergias</a></li><li><a href="#" onclick="hist(' + p.id + ')" >' +
+        '<i class="fa fa-plus"> Hitorial</i></a></li></ul></td></tr>')
 }
